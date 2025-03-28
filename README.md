@@ -1,6 +1,5 @@
 # RL Track Designer & Neural Evolution Simulator
 
-![Neural Network Car Training](https://github.com/user/rl-test/raw/main/screenshots/preview.png)
 
 *README ini available dalam Bahasa Indonesia dan English / This README is available in Indonesian and English*
 
