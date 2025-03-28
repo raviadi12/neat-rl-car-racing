@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Track Designer</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Track Designer</h1>
+        
+        <div class="controls">
+            <div> <!-- Group track management buttons -->
+                <button id="clear-btn">Clear Track</button>
+                <button id="undo-btn">Undo Last Point</button> <!-- Added Undo Button -->
+                <button id="export-track-btn">Export Track</button>
+                <button id="import-track-btn">Import Track</button>
+                <input type="file" id="track-file-input" accept=".json" class="hidden"> <!-- Hidden file input -->
+            </div>
+            <div> <!-- Group simulation buttons -->
+                <button id="test-btn">Test Track</button>
+                <button id="run-rl-btn">Run RL</button>
+                <button id="force-rl-btn">Force End Gen</button>
+            </div>
+            <div class="status">
+                <span id="track-status">Draw a track...</span>
+            </div>
+        </div>
+        
+        <div class="canvas-container">
+            <canvas id="track-canvas"></canvas>
+            <canvas id="car-canvas" class="hidden"></canvas>
+            <div id="distance-counter" class="hidden">Distance: 0px</div>
+            <div id="finish-notification" class="hidden">Finish!</div>
+        </div>
+        
+        <div id="network-visualization" class="network-panel hidden">
+            <h3>Best Network Structure</h3>
+            <div class="network-stats">
+                <span id="activation-stats">Activations: </span>
+                <span id="nodes-stats">Nodes: </span>
+                <span id="connections-stats">Connections: </span>
+            </div>
+            <canvas id="network-canvas"></canvas>
+            <div class="network-actions">
+                <button id="export-model-btn">Export Best Model to JSON</button>
+                <button id="import-model-btn">Import Model from JSON</button>
+                <input type="file" id="model-file-input" accept=".json" class="hidden">
+            </div>
+            <div class="network-legend">
+                <div class="legend-item"><span class="color-box input-node"></span> Input</div>
+                <div class="legend-item"><span class="color-box hidden-node"></span> Hidden</div>
+                <div class="legend-item"><span class="color-box output-node"></span> Output</div>
+                <div class="legend-item"><span class="color-box bias-node"></span> Bias</div>
+            </div>
+        </div>
+        
+        <div class="instructions">
+            <p>Click and drag to draw your track. If the track connects back to the start point, it will be a circuit track. 
+               Otherwise, the end point will be marked as the finish.</p>
+            <p class="car-instructions hidden">Use arrow keys or WASD to control the car. Stay on the track!</p>
+        </div>
+    </div>
+    
+    <script src="script.js"></script>
+</body>
+</html>

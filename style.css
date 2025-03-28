@@ -1,0 +1,357 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    padding: 20px;
+}
+
+.container {
+    max-width: 1000px;
+    margin: 0 auto;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+h1 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #333;
+}
+
+.controls {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    flex-wrap: wrap; /* Allow wrapping on smaller screens */
+    gap: 15px; /* Add some gap between groups */
+}
+
+.controls > div { /* Style the button groups */
+    display: flex;
+    gap: 10px;
+}
+
+/* Add specific styles if needed, e.g., different colors */
+#export-track-btn {
+    background-color: #16a085;
+}
+#export-track-btn:hover {
+    background-color: #117a65;
+}
+#import-track-btn {
+    background-color: #8e44ad;
+}
+#import-track-btn:hover {
+    background-color: #732d91;
+}
+
+#track-file-input { /* Ensure it's hidden */
+    display: none;
+}
+
+
+button {
+    padding: 10px 15px;
+    background-color: #3498db;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s;
+    margin-right: 10px;
+}
+
+button:hover {
+    background-color: #2980b9;
+}
+
+#test-btn {
+    background-color: #e67e22;
+}
+
+#test-btn:hover {
+    background-color: #d35400;
+}
+
+#test-btn.active {
+    background-color: #c0392b;
+}
+
+.status {
+    background-color: #f8f9fa;
+    padding: 10px;
+    border-radius: 4px;
+    font-weight: bold;
+    min-width: 220px;
+}
+
+.canvas-container {
+    width: 100%;
+    height: 500px;
+    border: 2px solid #ccc;
+    border-radius: 4px;
+    margin-bottom: 20px;
+    position: relative;
+    overflow: hidden;
+}
+
+#undo-btn {
+    background-color: #f39c12; /* Example: Orange color */
+}
+#undo-btn:hover {
+    background-color: #e67e22;
+}
+
+/* Add this if you want a different cursor during panning */
+body.panning,
+body.panning .canvas-container,
+body.panning #track-canvas {
+    cursor: grabbing; /* Show grabbing hand cursor */
+}
+
+#track-canvas {
+    width: 100%;
+    height: 100%;
+    cursor: crosshair;
+    background-color: #eaeaea;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+#car-canvas {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    pointer-events: none;
+}
+
+#distance-counter {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background-color: rgba(52, 73, 94, 0.7);
+    color: white;
+    padding: 8px 12px;
+    border-radius: 4px;
+    font-weight: bold;
+    font-family: monospace;
+    font-size: 16px;
+    z-index: 10;
+}
+
+#finish-notification {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: rgba(46, 204, 113, 0.9);
+    color: white;
+    padding: 20px 40px;
+    border-radius: 8px;
+    font-weight: bold;
+    font-size: 32px;
+    z-index: 20;
+    animation: pulse 1.5s infinite;
+}
+
+.hidden {
+    display: none;
+}
+
+.instructions {
+    background-color: #f8f9fa;
+    padding: 15px;
+    border-radius: 4px;
+    color: #666;
+    font-size: 14px;
+    border-left: 4px solid #3498db;
+}
+
+.car-instructions {
+    margin-top: 10px;
+    border-left: 4px solid #e67e22;
+}
+
+.circuit-track {
+    border: 2px solid #2ecc71;
+}
+
+.finish-track {
+    border: 2px solid #e74c3c;
+}
+
+.collision {
+    border: 2px solid #9b59b6;
+    animation: flash 0.5s infinite;
+}
+
+@keyframes flash {
+    0% { border-color: #9b59b6; }
+    50% { border-color: #e74c3c; }
+    100% { border-color: #9b59b6; }
+}
+
+@keyframes pulse {
+    0% { transform: translate(-50%, -50%) scale(1); }
+    50% { transform: translate(-50%, -50%) scale(1.1); }
+    100% { transform: translate(-50%, -50%) scale(1); }
+}
+
+/* Neural Network Visualization Styles */
+.network-panel {
+    background-color: #fff;
+    border-radius: 8px;
+    padding: 15px;
+    margin-bottom: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+#network-canvas {
+    width: 100%;
+    height: 300px;
+    background-color: #f8f9fa;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    margin: 10px 0;
+}
+
+.network-stats {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    margin-bottom: 10px;
+    font-size: 14px;
+    color: #555;
+}
+
+.network-actions {
+    margin: 15px 0;
+    display: flex;
+    justify-content: flex-start;
+    gap: 10px;
+}
+
+.network-actions button {
+    background-color: #34495e;
+    transition: background-color 0.3s;
+}
+
+.network-actions button:hover {
+    background-color: #2c3e50;
+}
+
+#export-model-btn {
+    position: relative;
+    overflow: hidden;
+}
+
+#export-model-btn.success:after {
+    content: '✓ Saved!';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #27ae60;
+    transform: translateY(0);
+    animation: slide-up 1.5s ease-in-out;
+}
+
+#import-model-btn {
+    background-color: #3498db;
+}
+
+#import-model-btn:hover {
+    background-color: #2980b9;
+}
+
+#import-model-btn.success:after {
+    content: '✓ Loaded!';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #27ae60;
+    transform: translateY(0);
+    animation: slide-up 1.5s ease-in-out;
+}
+
+#model-file-input {
+    display: none;
+}
+
+.network-legend {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    margin-top: 10px;
+}
+
+.legend-item {
+    display: flex;
+    align-items: center;
+    font-size: 12px;
+    color: #777;
+}
+
+.color-box {
+    width: 12px;
+    height: 12px;
+    margin-right: 5px;
+    border-radius: 3px;
+}
+
+.input-node {
+    background-color: #3498db;
+}
+
+.hidden-node {
+    background-color: #f39c12;
+}
+
+.output-node {
+    background-color: #2ecc71;
+}
+
+.bias-node {
+    background-color: #9b59b6;
+}
+
+#run-rl-btn {
+    background-color: #27ae60;
+}
+
+#run-rl-btn:hover {
+    background-color: #219653;
+}
+
+#run-rl-btn.active {
+    background-color: #c0392b;
+}
+
+#force-rl-btn {
+    background-color: #e74c3c;
+}
+
+#force-rl-btn:hover {
+    background-color: #c0392b;
+}
